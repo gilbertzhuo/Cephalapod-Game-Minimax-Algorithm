@@ -6,10 +6,6 @@ import java.util.Vector;
 
 public class Minimax {
 	
-	
-     
-	static //Look for all possible moves 
-   Vector<Point> list = new Vector<Point>();
      
 	public static int miniMax(int player, Board board) {
 		int score;
@@ -21,19 +17,16 @@ public class Minimax {
 			               total += board.grid[i][j];
 			        }
 			    }
-			 if(total > 0) {
-				 return -10;
-			 }else {
-				 return 10;
-			 }
+			return total;
 			
 		}
 		
-	   
+		  Vector<Point> list = new Vector<Point>();
 		for(int i = 0; i<3;i++) {
 			for(int j=0; j<3;j++) {
 				if(board.grid[i][j]==0) {
 				   board.BoardMove(player, i+1, j+1);
+				   board.capture(player, i+1, j+1);
 					if(player == -1) {
 					    score = miniMax(1,board);
 					}else {

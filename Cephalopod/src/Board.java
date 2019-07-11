@@ -17,7 +17,7 @@ public class Board {
 	
 
 	public Board(Board b) {
-		int grid[][] = new int[3][3];
+		
 		
 		 for (int i = 0; i < 3; i++) {
 		        for (int j = 0; j < 3; j++) {
@@ -99,7 +99,7 @@ public class Board {
 		    //If total is positive, player A win, if negative, player B wins
 		    if(total > 0){
 
-		            System.out.println("Player A wins ! HOORAY!");
+		        System.out.println("Player A wins ! HOORAY!");
 
 		        return -1;
 		    }
