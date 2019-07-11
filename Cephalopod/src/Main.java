@@ -18,14 +18,11 @@ public class Main {
 			small.capture(player, row, col);
 			small.printBoard();
 			
-			Board temp = new Board(small);
+			
 			if(small.checkEmpty()==true) {
-			int value = Minimax.miniMax(-1, temp);
-			int x = (value-1)/3;
-	        int y = (value-1)%3;
-	        
-	        small.BoardMove(-1,x+1,y+1);
-	        small.capture(-1, x+1, y+1);
+			Minimax max = new Minimax();
+			Point p =  max.findBestMove(small, player);
+		    small.BoardMove(-1, p.row, p.col);
 			small.printBoard();
 			}
 		

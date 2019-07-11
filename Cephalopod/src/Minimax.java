@@ -1,15 +1,55 @@
-import java.util.List;
-import java.util.Vector;
-
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
 
 
 public class Minimax {
+    Point findBestMove(Board board,int player) 
+	{ 
+	    int bestVal = Integer.MIN_VALUE;
+	    Point bestMove = new Point(-1,-1,1);
+	 
+	  
 	
-     
-	public static int miniMax(int player, Board board) {
-		int score;
+	    for (int i = 0; i<3; i++) 
+	    { 
+	        for (int j = 0; j<3; j++) 
+	        { 
+	            // Check if cell is empty 
+	            if (board.grid[i][j]==0) 
+	            { 
+	            	Board temp = new Board(board);
+	                // Make the move 
+	                temp.BoardMove(player, i+1, j+1);
+	                temp.capture(player, i+1, j+1);
+	                
+	                // compute evaluation function for this 
+	                // move. 
+	                int moveVal = miniMax(player,temp,0); 
+	  
+	                // Undo the move 
+	                
+	  
+	                // If the value of the current move is 
+	                // more than the best value, then update 
+	                // best/ 
+	                if (moveVal > bestVal) 
+	                { 
+	                    bestMove.row = i; 
+	                    bestMove.col = j; 
+	                    bestVal = moveVal; 
+	                } 
+	            } 
+	        } 
+	    } 
+	  
 	
+	    return bestMove; 
+	} 
+	public int miniMax(int player, Board board, int depth) {
+		
+		//Check for empty
 		if(board.checkEmpty()==false) {
 			int total = 0;
 			  for(int i =0; 3>i;i++){
@@ -17,63 +57,64 @@ public class Minimax {
 			               total += board.grid[i][j];
 			        }
 			    }
-			return total;
-			
+			//Getting the score
+			if(total ==0) {
+				return 0;
+			}else if(total >1) {
+				return -10;
+			}else { return 10;}
 		}
-		
-		  Vector<Point> list = new Vector<Point>();
-		for(int i = 0; i<3;i++) {
-			for(int j=0; j<3;j++) {
-				if(board.grid[i][j]==0) {
-				   board.BoardMove(player, i+1, j+1);
-				   board.capture(player, i+1, j+1);
-					if(player == -1) {
-					    score = miniMax(1,board);
-					}else {
-						score = miniMax(-1,board);
-					}
-					Point p = new Point(i,j,score);     
-					list.add(p);
-				}
-			}
-		}
-		
-	 
-		int bestMove = 0;
-		if(player == -1) {
-			int bestScore = Integer.MIN_VALUE;
-			for (int i = 0; i < list.size(); ++i) { 
-	            if (bestScore  < list.get(i).score) {
-	                bestScore = list.get(i).score;
-	                bestMove = i;
-	            }
-	        }
-		}else {
-			if(player == 1) {
-				int bestScore = Integer.MAX_VALUE;
-				for (int i = 0; i < list.size(); ++i) { 
-		            if (bestScore  > list.get(i).score) {
-		                bestScore = list.get(i).score;
-		                bestMove = i;
-		            }
-		        }
-			}
-		
 			
-			
-		}
-		int x =list.get(bestMove).row;
-		int y =list.get(bestMove).col;
-		int value = (x*3)+y+1;
+	if(player == -1) {
+		int best = Integer.MIN_VALUE;
+		 for (int i = 0; i<3; i++) 
+	        { 
+	            for (int j = 0; j<3; j++) 
+	            { 
+	                // Check if cell is empty 
+	                if (board.grid[i][j]==0) 
+	                { 
+	                    // Make the move 
+	                	Board temp = new Board(board);
+	                    temp.BoardMove(player, i+1, j+1);
+	                    //temp.capture(player, i+1, j+1);
+	                    temp.printBoard();
+	                    best = Math.max( best, 
+	                        miniMax(1,temp, depth+1) ); 
+	                  
+	                } 
+	            } 
+	        } 
+		 return best;
+	}else {
+		int best = Integer.MAX_VALUE;
+	
+		 for (int i = 0; i<3; i++) 
+	        { 
+	            for (int j = 0; j<3; j++) 
+	            { 
+	                // Check if cell is empty 
+	                if (board.grid[i][j]==0) 
+	                { 
+	                    // Make the move 
+	                	Board temp = new Board(board);
+	                    temp.BoardMove(player, i+1, j+1);
+	                 //   temp.capture(player, i+1, j+1);
+	                    temp.printBoard();
+	                    best = Math.min( best, 
+	                        miniMax(-1,temp, depth+1) ); 
+	                    
+	                } 
+	            } 
+	        } 
+		 return best;
 		
-		return value;
 		
 	}
 	
 	
 	
-	
-	
 }
-	
+}
+
 	
