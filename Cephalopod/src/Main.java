@@ -30,7 +30,7 @@ public class Main {
 			Minimax max = new Minimax();
 		    Board temp = new Board(small);
 		    temp.printBoard();
-			Point p =  max.findBestMove(temp, player);
+			Point p =  max.findBestMove(temp, -1);
 		    small.BoardMove(-1, p.row+1, p.col+1);
 		    if(small.checkNeighbour(p.row, p.col)>=2) {
 		    small.capture(-1,p.row+1,p.col+1);

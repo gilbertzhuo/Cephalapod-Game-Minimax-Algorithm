@@ -23,7 +23,7 @@ public class Minimax {
 	                temp.capture(player, i+1, j+1);
 	                
 	            
-	                int moveVal = miniMax(player,temp); 
+	                int moveVal = miniMax(1,temp); 
 	  
 	                if (moveVal > bestVal) 
 	                { 
@@ -56,7 +56,7 @@ public class Minimax {
 			}else { return 10;}
 		}
 			
-	if(player == -1) {
+	if(player == 1) {
 		int best = Integer.MIN_VALUE;
 		 for (int i = 0; i<3; i++) 
 	        { 
