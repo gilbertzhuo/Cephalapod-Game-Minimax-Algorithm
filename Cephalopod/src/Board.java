@@ -236,4 +236,25 @@ public class Board {
 	     
 	  
 	}
+	int checkNeighbour(int x, int y) {
+		    int num = 0;
+		 
+
+		    if(x-1>=0 && grid[x-1][y] !=0 ) {
+		        num++;
+		    }
+		    if(x+1<3 && grid[x+1][y] !=0) {
+		        num++;
+		    }
+		    if(y+1<3 && grid[x][y + 1] != 0) {
+		        num++;
+		    }
+		    if(y-1>=0 && grid[x][y - 1] != 0 ) {
+		        num++;
+		    }
+		  
+
+
+		  return num;
+	};
 }

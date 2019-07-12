@@ -9,20 +9,32 @@ public class Main {
 		
 		Board small = new Board(3,3);
         Scanner scan = new Scanner(System.in);
+        int row;
+        int col;
 		do {
+			do {
 		    System.out.println("ROW:");
-			int row = scan.nextInt();
+		       row = scan.nextInt();
 			System.out.println("COL:");
-			int col = scan.nextInt();
+			    col = scan.nextInt();
+			}while(small.validMove(row, col)==false);
 			small.BoardMove(player, row, col);
+		    if(small.checkNeighbour(row-1, col-1)>=2) {
 			small.capture(player, row, col);
-			small.printBoard();
+		    }
+		    
 			
+			small.printBoard();
 			
 			if(small.checkEmpty()==true) {
 			Minimax max = new Minimax();
-			Point p =  max.findBestMove(small, player);
-		    small.BoardMove(-1, p.row, p.col);
+		    Board temp = new Board(small);
+		    temp.printBoard();
+			Point p =  max.findBestMove(temp, player);
+		    small.BoardMove(-1, p.row+1, p.col+1);
+		    if(small.checkNeighbour(p.row, p.col)>=2) {
+		    small.capture(-1,p.row+1,p.col+1);
+		    }
 			small.printBoard();
 			}
 		

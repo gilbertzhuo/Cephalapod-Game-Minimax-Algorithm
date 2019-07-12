@@ -10,8 +10,6 @@ public class Minimax {
 	    int bestVal = Integer.MIN_VALUE;
 	    Point bestMove = new Point(-1,-1,1);
 	 
-	  
-	
 	    for (int i = 0; i<3; i++) 
 	    { 
 	        for (int j = 0; j<3; j++) 
@@ -26,10 +24,7 @@ public class Minimax {
 	                
 	                // compute evaluation function for this 
 	                // move. 
-	                int moveVal = miniMax(player,temp,0); 
-	  
-	                // Undo the move 
-	                
+	                int moveVal = miniMax(player,temp); 
 	  
 	                // If the value of the current move is 
 	                // more than the best value, then update 
@@ -47,7 +42,7 @@ public class Minimax {
 	
 	    return bestMove; 
 	} 
-	public int miniMax(int player, Board board, int depth) {
+	public int miniMax(int player, Board board) {
 		
 		//Check for empty
 		if(board.checkEmpty()==false) {
@@ -75,12 +70,11 @@ public class Minimax {
 	                if (board.grid[i][j]==0) 
 	                { 
 	                    // Make the move 
-	                	Board temp = new Board(board);
-	                    temp.BoardMove(player, i+1, j+1);
-	                    //temp.capture(player, i+1, j+1);
-	                    temp.printBoard();
+	                
+	                    board.BoardMove(player, i+1, j+1);
+	                    board.capture(player, i+1, j+1);
 	                    best = Math.max( best, 
-	                        miniMax(1,temp, depth+1) ); 
+	                        miniMax(-1,board) ); 
 	                  
 	                } 
 	            } 
@@ -96,13 +90,11 @@ public class Minimax {
 	                // Check if cell is empty 
 	                if (board.grid[i][j]==0) 
 	                { 
-	                    // Make the move 
-	                	Board temp = new Board(board);
-	                    temp.BoardMove(player, i+1, j+1);
-	                 //   temp.capture(player, i+1, j+1);
-	                    temp.printBoard();
+	                    
+	                    board.BoardMove(player, i+1, j+1);
+	                    board.capture(player, i+1, j+1);
 	                    best = Math.min( best, 
-	                        miniMax(-1,temp, depth+1) ); 
+	                        miniMax(1,board) ); 
 	                    
 	                } 
 	            } 
