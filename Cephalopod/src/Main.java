@@ -23,8 +23,7 @@ public class Main {
 			small.capture(player, row, col);
 		    }
 		    
-			
-			small.printBoard();
+		
 			
 			if(small.checkEmpty()==true) {
 			Minimax max = new Minimax();

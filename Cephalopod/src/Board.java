@@ -90,14 +90,19 @@ public class Board {
 	}
 	
 	int checkWin() {
-		  int total = 0;
+		    int a=0;
+		    int b=0;
 		    for(int i =0; 3>i;i++){
 		        for(int j = 0; 3>j; j++) {
-		               total += grid[i][j];
+		           if(grid[i][j]>0) {
+		        	   a++;
+		           }else {
+		        	   b++;
+		           }
 		        }
 		    }
 		    //If total is positive, player A win, if negative, player B wins
-		    if(total > 0){
+		    if(a>b){
 
 		        System.out.println("Player A wins ! HOORAY!");
 
@@ -164,35 +169,6 @@ public class Board {
 	         num4 = 3;
 	     }
 
-	     //Combination of 3
-	     if(up+down+left <= 6 && highest<up+down+left ){
-	         highest = up+down+left;
-	         num1 = 0;
-	         num2 = 1;
-	         num3 = 2;
-	     }
-
-	     if(up+down+right <= 6 && highest<up+down+right ) {
-	         highest = up + down + right;
-	         num1 = 0;
-	         num2 = 1;
-	         num3 = 3;
-	     }
-
-	     if(down+left+right <= 6 && highest<down+left+right ){
-	         highest = down+left+right;
-	         num1 = 1;
-	         num2 = 2;
-	         num3 = 3;
-
-	     }
-
-	     if(up+left+right <= 6 && highest<up+left+right ){
-	         highest = up+left+right;
-	         num1 = 0;
-	         num2 = 2;
-	         num3 = 3;
-	     }
 
 	     if(highest != 0) {
 	         grid[row-1][col-1] = highest * player;
